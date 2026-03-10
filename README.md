@@ -56,7 +56,7 @@ The system instantly recalculates three primary metrics upon every entry:
 
 1.  **Clone the Repo:**
     ```bash
-    git clone [https://github.com/YOUR-USERNAME/fintrack.git](https://github.com/YOUR-USERNAME/fintrack.git)
+    git clone [https://github.com/YOUR-USERNAME/fintrack.git](https://github.com/sk72775/fintrack.git)
     ```
 2.  **Run:** Open `index.html` in any modern web browser.
 3.  **Deployment:** This project is ready for **GitHub Pages**. Simply enable Pages in your repository settings to host it as a live website.
