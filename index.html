@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinTrack</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💵</text></svg>">
+    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-shape shape-3"></div>
+
+    <div class="app-container glass">
+        <nav class="navbar glass">
+            <div class="logo">FinTrack</div>
+            <div class="nav-links">
+                <button class="nav-btn active" data-target="dashboard">Dashboard</button>
+                <button class="nav-btn" data-target="transactions">Transactions</button>
+                <button class="nav-btn" data-target="analytics">Analytics</button>
+                <button id="exportPdfBtn" class="action-btn">📄 Export PDF</button>
+            </div>
+        </nav>
+
+        <main class="content">
+            <section id="dashboard" class="view active-view">
+                <div class="summary-cards">
+                    <div class="card glass">
+                        <h3>Total Balance</h3>
+                        <h2 id="totalBalance">₹0.00</h2>
+                    </div>
+                    <div class="card glass">
+                        <h3>Total Income</h3>
+                        <h2 id="totalIncome">₹0.00</h2>
+                    </div>
+                    <div class="card glass">
+                        <h3>Total Expenses</h3>
+                        <h2 id="totalExpenses">₹0.00</h2>
+                    </div>
+                </div>
+
+                <div class="form-container glass">
+                    <h3>Add New Transaction</h3>
+                    <form id="expenseForm">
+                        <div class="input-group">
+                            <select id="typeInput" required>
+                                <option value="expense" selected>📉 Expense</option>
+                                <option value="income">📈 Income</option>
+                            </select>
+                            <input type="date" id="dateInput" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="descInput" placeholder="Description (e.g., Salary, Groceries)" required>
+                            <input type="number" id="amountInput" placeholder="Amount" step="0.01" required>
+                            <select id="categoryInput" required>
+                                <option value="" disabled selected>Select Category</option>
+                                <option value="Salary">💰 Salary / Wage</option>
+                                <option value="Investment">📈 Investment</option>
+                                <option value="Food">🍔 Food & Dining</option>
+                                <option value="Transport">🚗 Transportation</option>
+                                <option value="Utilities">💡 Utilities</option>
+                                <option value="Entertainment">🎬 Entertainment</option>
+                                <option value="Shopping">🛍️ Shopping</option>
+                                <option value="Other">✨ Other</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="submit-btn">Add Transaction</button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="transactions" class="view">
+                <div class="controls glass">
+                    <input type="text" id="searchInput" placeholder="Search transactions...">
+                    <select id="filterCategory">
+                        <option value="All">All Categories</option>
+                        <option value="Salary">Salary / Wage</option>
+                        <option value="Investment">Investment</option>
+                        <option value="Food">Food & Dining</option>
+                        <option value="Transport">Transportation</option>
+                        <option value="Utilities">Utilities</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <select id="sortSelect">
+                        <option value="date-desc">Date (Newest First)</option>
+                        <option value="date-asc">Date (Oldest First)</option>
+                        <option value="amount-desc">Amount (Highest)</option>
+                        <option value="amount-asc">Amount (Lowest)</option>
+                    </select>
+                </div>
+
+                <div class="table-container glass">
+                    <table id="transactionsTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsBody">
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="analytics" class="view">
+                <div class="charts-grid">
+                    <div class="chart-container glass">
+                        <h3>Expense Breakdown</h3>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                    <div class="chart-container glass">
+                        <h3>Income vs Expense</h3>
+                        <canvas id="monthlyChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="insights-header">
+                    <h3>Top Financial Insights</h3>
+                </div>
+                <div id="insightsFeed" class="insights-feed">
+                    </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
