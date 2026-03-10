@@ -1,4 +1,5 @@
 # 📈 Fintrack — Personal Finance & Cash Flow Analyzer
+https://fintrack-ledger.netlify.app/
 
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![Chart.js](https://img.shields.io/badge/chart.js-F5788D.svg?style=for-the-badge&logo=chart.js&logoColor=white)
@@ -55,9 +56,6 @@ The system instantly recalculates three primary metrics upon every entry:
 ## 🚀 Installation & Usage
 
 1.  **Clone the Repo:**
-    ```bash
-    git clone (https://github.com/sk72775/fintrack.git)
-    ```
 2.  **Run:** Open `index.html` in any modern web browser.
 3.  **Deployment:** This project is ready for **GitHub Pages**. Simply enable Pages in your repository settings to host it as a live website.
 
