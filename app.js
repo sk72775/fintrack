@@ -1,7 +1,6 @@
-// Data State
+
 let transactions = JSON.parse(localStorage.getItem('fintrack_data')) || [];
 
-// DOM Elements
 const navBtns = document.querySelectorAll('.nav-btn');
 const views = document.querySelectorAll('.view');
 const expenseForm = document.getElementById('expenseForm');
@@ -10,13 +9,12 @@ const totalBalance = document.getElementById('totalBalance');
 const totalIncome = document.getElementById('totalIncome');
 const totalExpenses = document.getElementById('totalExpenses');
 
-// Filter & Sort
 const searchInput = document.getElementById('searchInput');
 const filterCategory = document.getElementById('filterCategory');
 const sortSelect = document.getElementById('sortSelect');
 const exportPdfBtn = document.getElementById('exportPdfBtn');
 
-// Charts
+
 let categoryChartInstance = null;
 let monthlyChartInstance = null;
 
@@ -63,7 +61,7 @@ function addTransaction(e) {
     saveData();
     expenseForm.reset();
     
-    // Default back to expense
+  
     document.getElementById('typeInput').value = 'expense';
     
     updateDashboard();
@@ -119,7 +117,7 @@ function renderTransactions() {
         const row = document.createElement('tr');
         const isIncome = t.type === 'income';
         const amountClass = isIncome ? 'text-income' : 'text-expense';
-        // Updated to Rupee Symbol
+       
         const displayAmount = isIncome ? `+₹${t.amount.toFixed(2)}` : `-₹${t.amount.toFixed(2)}`;
 
         row.innerHTML = `
@@ -138,7 +136,7 @@ function renderTransactions() {
 function renderCharts() {
     Chart.defaults.color = 'rgba(255, 255, 255, 0.7)';
 
-    // 1. Pie Chart
+    
     const expensesOnly = transactions.filter(t => t.type !== 'income');
     const categoryData = {};
     expensesOnly.forEach(exp => {
@@ -160,7 +158,7 @@ function renderCharts() {
         options: { responsive: true, maintainAspectRatio: false }
     });
 
-    // 2. Bar Chart
+  
     const monthlyData = {};
     transactions.forEach(t => {
         const month = new Date(t.date).toLocaleString('default', { month: 'short', year: 'numeric' });
@@ -185,13 +183,13 @@ function renderCharts() {
             labels: labels,
             datasets: [
                 {
-                    label: 'Income (₹)', // Updated to Rupee Symbol
+                    label: 'Income (₹)', 
                     data: incData,
                     backgroundColor: 'rgba(56, 239, 125, 0.8)',
                     borderRadius: 4
                 },
                 {
-                    label: 'Expense (₹)', // Updated to Rupee Symbol
+                    label: 'Expense (₹)', 
                     data: expData,
                     backgroundColor: 'rgba(255, 8, 68, 0.8)',
                     borderRadius: 4
@@ -222,7 +220,7 @@ function generateInsights() {
     const inc = transactions.filter(t => t.type === 'income').reduce((acc, curr) => acc + curr.amount, 0);
     const exp = transactions.filter(t => t.type !== 'income').reduce((acc, curr) => acc + curr.amount, 0);
 
-    // 1. Savings Rate
+    
     if (inc > 0) {
         const saved = inc - exp;
         const rate = ((saved / inc) * 100).toFixed(1);
@@ -233,7 +231,7 @@ function generateInsights() {
         }
     }
 
-    // 2. Top Spending Category
+  
     const expensesOnly = transactions.filter(t => t.type !== 'income');
     if (expensesOnly.length > 0) {
         const categoryTotals = {};
@@ -241,7 +239,7 @@ function generateInsights() {
         const topCategory = Object.keys(categoryTotals).reduce((a, b) => categoryTotals[a] > categoryTotals[b] ? a : b);
         insights.push(`Your highest spending category is <strong>${topCategory}</strong> at <strong>₹${categoryTotals[topCategory].toFixed(2)}</strong>.`);
         
-        // 3. Largest Expense
+       
         const largest = expensesOnly.reduce((max, e) => e.amount > max.amount ? e : max, expensesOnly[0]);
         insights.push(`Your largest single expense was <strong>₹${largest.amount.toFixed(2)}</strong> for "${largest.desc}".`);
     }
@@ -259,7 +257,7 @@ function generatePDF() {
     const doc = new jsPDF();
     doc.text("Financial Report", 14, 20);
     
-    // Using Rs. here because the default PDF font doesn't render the ₹ symbol correctly!
+    
     const tableColumn = ["Date", "Type", "Description", "Category", "Amount (Rs.)"];
     const tableRows = [];
 
@@ -278,5 +276,6 @@ function generatePDF() {
     const dateStr = new Date().toISOString().split('T')[0];
     doc.save(`Financial_Report_${dateStr}.pdf`);
 }
+
 
 init();
