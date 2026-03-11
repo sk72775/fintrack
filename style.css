@@ -25,10 +25,10 @@ body {
     box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.3);
 }
 
-/* THE MAGIC FIX: Constraining the app width for desktop monitors */
+
 .app-container {
-    max-width: 960px; /* Locked down from 1200px to stop the bloated stretching */
-    margin: 4vh auto; /* Centers it nicely on large screens */
+    max-width: 960px; 
+    margin: 4vh auto; 
     padding: 20px;
     min-height: 85vh;
 }
@@ -94,7 +94,6 @@ body {
     box-shadow: 0 6px 15px rgba(56, 239, 125, 0.4);
 }
 
-/* Button size reduced */
 .submit-btn {
     width: 100%;
     padding: 12px; 
@@ -142,7 +141,6 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Locked to exactly 3 columns so they never stretch weirdly */
 .summary-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
@@ -193,7 +191,7 @@ body {
 
 input, select {
     width: 100%;
-    padding: 10px 14px; /* Tighter input height */
+    padding: 10px 14px; 
     background: rgba(0, 0, 0, 0.25);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
@@ -233,18 +231,17 @@ tr:hover { background: rgba(255, 255, 255, 0.03); }
 .insight-card h4 { color: #38ef7d; margin-bottom: 4px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px; }
 .insight-card p { color: rgba(255, 255, 255, 0.8); line-height: 1.4; font-size: 0.85rem; }
 
-/* Mobile responsiveness */
+
 @media (max-width: 850px) { 
     .charts-grid { grid-template-columns: 1fr; } 
-    .summary-cards { grid-template-columns: 1fr 1fr; } /* Stacks 2 and 1 on tablets */
+    .summary-cards { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
     .nav-links { flex-wrap: wrap; justify-content: center; margin-top: 10px; }
     .navbar { flex-direction: column; }
     .input-group, .controls { flex-direction: column; }
-    .summary-cards { grid-template-columns: 1fr; } /* Single column on phones */
-}
-/* Fix for invisible calendar icon in dark mode */
+    .summary-cards { grid-template-columns: 1fr; } 
+
 input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(1);
     opacity: 0.8;
@@ -254,4 +251,5 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 input[type="date"]::-webkit-calendar-picker-indicator:hover {
     opacity: 1;
+
 }
